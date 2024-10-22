@@ -5,10 +5,11 @@ package Chap3_검색;
  */
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 public class train_실습3_9스트링리스트정렬 {
 
-	    public static String[] removeElement1(String[] arr, String item) {}
+	    //public static String[] removeElement1(String[] arr, String item) {}
 	    
 	    static void getList(List<String> list) {
 			list.add("서울");	list.add("북경");
@@ -23,17 +24,24 @@ public class train_실습3_9스트링리스트정렬 {
 			list.add(1, "LA");
 	    }
 	    static void showList(String topic, List<String> list) {//리스트 인덱스를 사용하여 리스트 멤버들을 출력
-
+	    	System.out.println(topic);
+	    	for (int i = 0; i<list.size(); i++) {
+	    		System.out.println(i+ ":"+list.get(i));
+	    	}
 	    }
 	    static void sortList(List<String> list) {//list는 정렬 안되므로 배열로 변환후 정렬 후 다시 리스트로 리턴
-
+	    	String[]arr = list.toArray(new String[0]);
+	    	Arrays.sort(arr);
+	    	list.clear();
+	    	list.addAll(Arrays.asList(arr));
+	    	
 	    }
 	    
 	    static String[] removeDuplicateList(List<String> list) {//중복 제거
-		    String cities[] = new String[0];//empty 배열을 cities 참조 변수가 가리킨다
-		    cities = list.toArray(cities);//toArray()함수는 list를 배열로 만들때 더 큰 배열이 필요하면 새로 할당된 배열을 리턴
-		    
-		    return cities;
+	    	 // LinkedHashSet을 사용하면 순서를 유지하며 중복을 제거할 수 있음
+	        LinkedHashSet<String> set = new LinkedHashSet<>(list);
+	        // LinkedHashSet을 배열로 변환
+	        return set.toArray(new String[0]);
 	    }
 		public static void main(String[] args) {
 			ArrayList<String> list = new ArrayList<>();

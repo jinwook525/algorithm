@@ -16,12 +16,13 @@ public class train_실습2_5정수배열정렬 {
 		showData("실수 난수 입력", data);//top 개수 만큼 출력
 
 		reverse(data);//역순으로 재배치 - 교재 67페이지 참조
-		showData("역순 재배치", data)
-		sysout(Arrays.toString(data));// 교재 84페이지 코드 참조
-		showData("실수 스트링의 정렬", data)
+		showData("역순 재배치", data);
+		System.out.println(Arrays.toString(data));// 교재 84페이지 코드 참조
+		showData("실수 스트링의 정렬", data);
 		sortData(data);//교재 205 bubbleSort() 함수 코드를 사용 - 올림차순으로 정렬
 		showData("버블정렬", data);
-		float realData = 실수 난수 생성;
+		Random rand = new Random();
+		float realData = rand.nextFloat(); //실수 난수 생성;
 		insertData(data, realData);//입력 실수보다 큰 숫자를 우측으로 이동
 		showData("실수 삽입후", data);
 	}
@@ -32,22 +33,48 @@ public class train_실습2_5정수배열정렬 {
 			System.out.println(data[i]);
 		}
 	}
-	inputData() {
+	public static void inputData(float data[], int count) {
 		//난수 실수를 입력
+		Random rand = new Random();
+		for(int i=0 ; i<count; i++)
+			data[i]=rand.nextFloat();
 		top += count;
 
 	}
-	reverse() {//역순으로 재배치 - top 갯수만 역순 재배치
-		
+	public static void reverse(float data[]) {//역순으로 재배치 - top 갯수만 역순 재배치
+		int start = 0;
+		int end = top -1;
+		 while (start < end) {
+	            swap(data, start, end); // 앞뒤 값을 교환
+	            start++;
+	            end--;
+		}
 	}
-	swap() {//교재 67페이지 - 맞교환
-		
+	public static void swap(float data[], int i, int j) {//교재 67페이지 - 맞교환
+		float temp = data[i];
+		data[i]=data[j];
+		data[j]= temp;
 	}
-	sortData() {//올림차순으로 정렬 - top 갯수를 사용
-
+	public static void sortData(float data[]) {//올림차순으로 정렬 - top 갯수를 사용
+		for (int i=0; i< top-1 ; i++) {
+			for(int j=0 ; j<top-1 ; j++) {
+				if(data[j]>data[j+1]) {
+					swap(data, j, j+1);
+				}
+			}
+		}
 	}
-	insertData() {//insert되는 실수 값이 insert될 위치를 찾아 보다 큰 값은 우측으로 이동
-
+	public static void insertData(float data[], float value) {//insert되는 실수 값이 insert될 위치를 찾아 보다 큰 값은 우측으로 이동
+		int i;
+		for (i = top - 1; i >= 0; i--) {
+            if (data[i] > value) {
+                data[i + 1] = data[i];
+            } else {
+                break; 
+            }
+        }
+        data[i + 1] = value;
+        top++; 
 	}
 
 
